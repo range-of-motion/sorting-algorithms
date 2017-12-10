@@ -13,11 +13,51 @@
                 margin: 96px auto;
                 width: 90%;
                 height: 40vw;
-                background: red;
             }
         </style>
     </head>
     <body>
         <canvas id="debug"></canvas>
+        <script>
+            // Config
+            var amountOfNumbers = 10;
+            var maxNumber = 100;
+
+            // Generating
+            var numbers = [];
+
+            function random() {
+                return 1;
+            }
+
+            for (var i = 0; i < amountOfNumbers; i ++) {
+                numbers[i] = Math.floor(Math.random() * maxNumber) + 1
+            }
+
+            // Rendering
+            var canvas = document.getElementById('debug');
+
+            var context = canvas.getContext('2d');
+
+            var canvasWidth = canvas.width = canvas.clientWidth;
+            var canvasHeight = canvas.height = canvas.clientHeight;
+
+            function render() {
+                context.clearRect(0, 0, canvasWidth, canvasHeight);
+
+                for (var i = 0; i < amountOfNumbers; i ++) {
+                    var rectangleWidth = canvasWidth / amountOfNumbers;
+                    var rectangleHeight = canvasHeight / maxNumber * numbers[i];
+                    var x = rectangleWidth * i;
+                    var y = canvasHeight - rectangleHeight;
+
+                    context.fillRect(x, y, rectangleWidth, rectangleHeight);
+                }
+
+                requestAnimationFrame(render);
+            }
+
+            render();
+        </script>
     </body>
 </html>
