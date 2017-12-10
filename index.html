@@ -42,6 +42,8 @@
             var canvasWidth = canvas.width = canvas.clientWidth;
             var canvasHeight = canvas.height = canvas.clientHeight;
 
+            var cursor = null;
+
             function render() {
                 context.clearRect(0, 0, canvasWidth, canvasHeight);
 
@@ -50,6 +52,12 @@
                     var rectangleHeight = canvasHeight / maxNumber * numbers[i];
                     var x = rectangleWidth * i;
                     var y = canvasHeight - rectangleHeight;
+
+                    context.fillStyle = '#000';
+
+                    if (i == cursor) {
+                        context.fillStyle = '#FF0000';
+                    }
 
                     context.fillRect(x, y, rectangleWidth, rectangleHeight);
                 }
@@ -63,6 +71,8 @@
             var didSwapDuringCycle = false;
 
             function step(index = 0) {
+                cursor = index;
+
                 if (numbers[index] > numbers[index + 1]) {
                     var temporary = numbers[index];
 
