@@ -58,6 +58,34 @@
             }
 
             render();
+
+            // Sorting
+            var didSwapDuringCycle = false;
+
+            function step(index = 0) {
+                if (numbers[index] > numbers[index + 1]) {
+                    var temporary = numbers[index];
+
+                    numbers[index] = numbers[index + 1];
+                    numbers[index + 1] = temporary;
+
+                    didSwapDuringCycle = true;
+                }
+
+                if (index + 1 > numbers.length - 1) {
+                    if (didSwapDuringCycle) {
+                        setTimeout(function () {
+                            step(0);
+                        }, 1000);
+                    }
+                } else {
+                    setTimeout(function () {
+                        step(index + 1);
+                    }, 1000);
+                }
+            }
+
+            step();
         </script>
     </body>
 </html>
