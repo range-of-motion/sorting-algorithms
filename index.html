@@ -81,9 +81,13 @@
 
                 if (index + 1 > numbers.length - 1) {
                     if (didSwapDuringCycle) {
+                        didSwapDuringCycle = false;
+
                         setTimeout(function () {
                             step(0);
                         }, stepInterval);
+                    } else {
+                        cursor = null;
                     }
                 } else {
                     setTimeout(function () {
